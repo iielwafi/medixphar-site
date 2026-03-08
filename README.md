@@ -1,6 +1,6 @@
 # 🧬 MedixPhar — Student Club Website
 
-![MedixPhar](assets/img/logo.png)
+![MEDIXPHAR-SITE](assets/img/logo.svg)
 
 Official website of **MedixPhar**, a student club focused on **medicine, pharmacy, innovation, and community collaboration**.
 
