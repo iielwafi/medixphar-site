@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News • MedixPhar</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html" aria-label="MedixPhar Home">
+        <img src="assets/img/logo.svg" alt="MedixPhar" class="brand__logo">
+        <span class="brand__name"></span>
+      </a>
+
+      <nav class="nav" data-nav>
+        <a class="nav__link" href="about.html" data-i18n="nav_about">À propos</a>
+        <a class="nav__link" href="events.html" data-i18n="nav_events">Activités</a>
+        <a class="nav__link" href="news.html">News</a>
+        <a class="nav__link" href="index.html#team" data-i18n="nav_team">Équipe</a>
+        <a class="btn btn--primary nav__cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdXXXXXXXXXXXX/viewform" target="_blank" rel="noopener" data-i18n="nav_join">Rejoindre</a>
+
+        <div class="controls">
+          <div class="seg" aria-label="Language">
+            <button class="seg__btn" type="button" data-lang="fr">FR</button>
+            <button class="seg__btn" type="button" data-lang="en">EN</button>
+          </div>
+          <button class="iconbtn" type="button" data-theme-toggle aria-label="Theme">
+            <span data-theme-icon>🌙</span>
+          </button>
+        </div>
+      </nav>
+
+      <button class="burger" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero page -->
+    <section class="pagehero">
+      <div class="container">
+        <h1>News</h1>
+        <p class="muted">Les dernières actualités du club MedixPhar.</p>
+      </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="section reveal" id="news-page">
+      <div class="container">
+        <div class="section__head">
+          <h2>Latest News</h2>
+          <p class="muted">Découvrez les dernières nouvelles et annonces du club.</p>
+        </div>
+
+        <div class="news-page-grid" id="newsPageGrid">
+          <div class="news-empty">Loading news...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> MedixPhar</div>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="footer_home">Accueil</a>
+        <a href="index.html#contact" data-i18n="footer_contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Activités • MedixPhar</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.svg" class="brand__logo" alt="MedixPhar">
+        <span class="brand__name"></span>
+      </a>
+
+      <nav class="nav" data-nav>
+        <a class="nav__link" href="about.html" data-i18n="nav_about">À propos</a>
+        <a class="nav__link is-active" href="events.html" data-i18n="nav_events">Activités</a>
+        <a class="nav__link" href="index.html#team" data-i18n="nav_team">Équipe</a>
+        <a class="btn btn--primary nav__cta" href="index.html#join" data-i18n="nav_join">Rejoindre</a>
+
+        <div class="controls">
+          <div class="seg">
+            <button class="seg__btn" type="button" data-lang="fr">FR</button>
+            <button class="seg__btn" type="button" data-lang="en">EN</button>
+          </div>
+          <button class="iconbtn" type="button" data-theme-toggle><span data-theme-icon>🌙</span></button>
+        </div>
+      </nav>
+
+      <button class="burger" type="button" data-nav-toggle aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="pagehero">
+      <div class="container">
+        <h1 data-i18n="events_title">Activités</h1>
+        <p class="muted" data-i18n="events_sub">Quelques formats d’activités que le club organise.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- grid dynamic from Google Sheet -->
+        <div id="eventsGrid" class="eventsgrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> MedixPhar</div>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="footer_home">Accueil</a>
+        <a href="index.html#join" data-i18n="footer_contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

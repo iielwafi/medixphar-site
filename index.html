@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedixPhar</title>
+  <meta name="description" content="Club étudiant - Médecine & Pharmacie. Événements, ateliers et initiatives." />
+  <link rel="icon" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar" id="top">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html" aria-label="MedixPhar Home">
+        <img src="assets/img/logo.svg" alt="MedixPhar" class="brand__logo">
+        <span class="brand__name"></span>
+      </a>
+
+      <nav class="nav" data-nav>
+        <a class="nav__link" href="about.html" data-i18n="nav_about">À propos</a>
+        <a class="nav__link" href="events.html" data-i18n="nav_events">Activités</a>
+        <a class="nav__link" href="#team" data-i18n="nav_team">Équipe</a>
+        <a class="btn btn--primary nav__cta" href="https://docs.google.com/forms/d/e/1FAIpQLSda-ALUMEm5qzFgLft4VPFEZBL1Nqb2M48dysyfeZCPMERQeQ/viewform?usp=header" target="_blank" rel="noopener" data-i18n="nav_join">Rejoindre</a>
+
+        <div class="controls">
+          <div class="seg" aria-label="Language">
+            <button class="seg__btn" type="button" data-lang="fr">FR</button>
+            <button class="seg__btn" type="button" data-lang="en">EN</button>
+          </div>
+          <button class="iconbtn" type="button" data-theme-toggle aria-label="Theme">
+            <span data-theme-icon>🌙</span>
+          </button>
+        </div>
+      </nav>
+
+      <button class="burger" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <!-- Left -->
+        <div class="hero__left">
+          <div class="pill">
+            <span class="dot"></span>
+            <span data-i18n="badge">Club étudiant • Médecine & Pharmacie</span>
+          </div>
+
+          <h1 class="hero__title" data-i18n="hero_title">
+            Construisons une communauté qui apprend, agit et impacte.
+          </h1>
+
+          <p class="hero__lead" data-i18n="hero_sub">
+            Événements, ateliers et initiatives pour développer vos compétences et créer des opportunités.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#join" data-i18n="cta_join">Devenir membre</a>
+            <a class="btn btn--glass" href="#events" data-i18n="cta_events">Voir les activités</a>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="kpi__n">+10</div>
+              <div class="kpi__t" data-i18n="stat_events">Événements</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi__n">+5</div>
+              <div class="kpi__t" data-i18n="stat_partners">Partenaires</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi__n">100%</div>
+              <div class="kpi__t" data-i18n="stat_spirit">Esprit</div>
+            </div>
+          </div>
+        </div>
+
+    <!-- News Hero -->
+<aside class="glass card news-hero reveal">
+
+  <div class="card__head">
+    <h3>News</h3>
+  </div>
+
+  <!-- News Slider -->
+  <div class="news-slider" id="newsSlider">
+
+    <div class="news-viewport">
+      <div class="news-track" id="newsTrack">
+        <div class="muted">Loading news...</div>
+      </div>
+    </div>
+
+    <div class="news-dots" id="newsDots"></div>
+
+  </div>
+
+  <!-- Button -->
+  <div style="margin-top:16px">
+    <a href="news.html" class="btn btn--primary">
+      View all news
+    </a>
+  </div>
+
+</aside>
+      </div>
+    <!-- About Preview -->
+    <section class="section reveal" id="about">
+      <div class="container">
+        <div class="section__head">
+          <h2 data-i18n="about_title">À propos</h2>
+          <p class="muted" data-i18n="about_sub">Notre mission: apprendre, partager, impacter.</p>
+        </div>
+
+        <div class="grid3">
+          <article class="glass card">
+            <h3 data-i18n="about_card1_title">Mission</h3>
+            <p class="muted" data-i18n="about_card1_text">
+              Développer les compétences scientifiques, humaines et professionnelles des étudiants.
+            </p>
+          </article>
+
+          <article class="glass card">
+            <h3 data-i18n="about_card2_title">Vision</h3>
+            <p class="muted" data-i18n="about_card2_text">
+              Créer un réseau solide entre étudiants, enseignants et partenaires du domaine santé.
+            </p>
+          </article>
+
+          <article class="glass card">
+            <h3 data-i18n="about_card3_title">Valeurs</h3>
+            <p class="muted" data-i18n="about_card3_text">
+              Excellence, collaboration, éthique, et impact positif sur la communauté.
+            </p>
+          </article>
+        </div>
+
+        <div class="section__cta">
+          <a class="btn btn--primary" href="about.html" data-i18n="about_cta">En savoir plus</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Slider Preview -->
+    <section class="section reveal" id="events">
+      <div class="container">
+        <div class="section__head">
+          <h2 data-i18n="events_title">Activités</h2>
+          <p class="muted" data-i18n="events_sub">Quelques formats d’activités que le club organise.</p>
+        </div>
+
+        <div class="slider" id="eventsSlider">
+          <div class="slider__viewport">
+            <div class="slider__track" id="eventsTrack"></div>
+          </div>
+          <div class="slider__dots" id="eventsDots"></div>
+        </div>
+
+        <div class="section__cta">
+          <a class="btn btn--primary" href="events.html" data-i18n="events_cta">En savoir plus</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section reveal" id="team">
+      <div class="container">
+        <div class="section__head">
+          <h2 data-i18n="team_title">Équipe</h2>
+          <p class="muted" data-i18n="team_sub">Une équipe motivée pour organiser et innover.</p>
+        </div>
+
+        <div class="team">
+          <article class="glass card team__member">
+  <img src="assets/img/team1.jpeg" alt="President" class="team__photo">
+  <div>
+    <div class="team__name">President</div>
+    <div class="muted" data-i18n="team_role1">Présidence</div>
+  </div>
+</article>
+
+<article class="glass card team__member">
+  <img src="assets/img/team2.jpeg" alt="Vice President" class="team__photo">
+  <div>
+    <div class="team__name">Vice President</div>
+    <div class="muted" data-i18n="team_role2">Vice-présidence</div>
+  </div>
+</article>
+
+<article class="glass card team__member">
+  <img src="assets/img/team3.jpeg" alt="Tresorier" class="team__photo">
+  <div>
+    <div class="team__name">Tresorier</div>
+    <div class="muted" data-i18n="team_role3">Trésorerie</div>
+  </div>
+</article>
+
+<article class="glass card team__member">
+  <img src="assets/img/team4.jpeg" alt="Chef audiovisual" class="team__photo">
+  <div>
+    <div class="team__name">Chef audiovisual</div>
+    <div class="muted" data-i18n="team_role4">Communication</div>
+  </div>
+</article>
+<article class="glass card team__member">
+  <img src="assets/img/team5.jpeg" alt="chef organisation & événementiel" class="team__photo">
+  <div>
+    <div class="team__name">chef organisation & événementiel</div>
+    <div class="muted" data-i18n="team_role4">organisation </div>
+  </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- Partners -->
+<section class="section reveal" id="partners">
+  <div class="container">
+
+    <div class="section__head">
+      <h2 data-i18n="partners_title">Partenaires</h2>
+      <p class="muted" data-i18n="partners_sub">
+        Ils nous font confiance et soutiennent nos activités.
+      </p>
+    </div>
+
+    <div class="partners-slider">
+      <div class="partners-track">
+
+        <div class="partner">
+          <img src="assets/img/p1.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p2.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p3.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p5.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p6.jpeg" alt="partner">
+        </div>
+
+        <!-- duplication pour animation -->
+        <div class="partner">
+          <img src="assets/img/p1.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p2.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p3.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p5.jpeg" alt="partner">
+        </div>
+
+        <div class="partner">
+          <img src="assets/img/p6.jpeg" alt="partner">
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+    <!-- Join -->
+    <section class="section reveal" id="join">
+      <div class="container">
+        <div class="glass cta">
+          <div>
+            <h2 data-i18n="join_title">Prête à rejoindre l’aventure ?</h2>
+            <p class="muted" data-i18n="join_sub">Laisse-nous tes infos et on te contacte rapidement.</p>
+          </div>
+
+          <form class="form" onsubmit="event.preventDefault(); alert('✅ Merci!');">
+            <input class="input" type="text" data-i18n-ph="ph_name" placeholder="Nom" required>
+            <input class="input" type="email" data-i18n-ph="ph_email" placeholder="Email" required>
+            <a class="btn btn--primary nav__cta" href="https://docs.google.com/forms/d/e/1FAIpQLSda-ALUMEm5qzFgLft4VPFEZBL1Nqb2M48dysyfeZCPMERQeQ/viewform?usp=header" target="_blank" rel="noopener" data-i18n="nav_join">Rejoindre</a>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> MedixPhar</div>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="footer_home">Accueil</a>
+        <a href="#join" data-i18n="footer_contact">Contact</a>
+        
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
