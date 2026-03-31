@@ -971,12 +971,12 @@ html[data-theme="light"] .footer{
 
   .brand{
     gap: 8px;
-    max-width: calc(100% - 62px);
+    max-width: calc(100% - 58px);
   }
 
   .brand__logo{
-    width: 64px;
-    height: 64px;
+    width: 84px;
+    height: 84px;
   }
 
   .brand__name{
@@ -1383,8 +1383,8 @@ html[data-theme="light"] .footer{
   }
 
   .brand__logo{
-    width: 56px;
-    height: 56px;
+    width: 110px;
+    height: 133px;
   }
 
   .brand__name{
