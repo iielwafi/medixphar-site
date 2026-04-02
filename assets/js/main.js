@@ -433,7 +433,7 @@ async function initNewsSlider() {
   }
 }
 
-initNewsSlider();
+//initNewsSlider();
 
 async function loadNewsPage() {
   const grid = document.getElementById("newsPageGrid");
@@ -443,7 +443,7 @@ async function loadNewsPage() {
   grid.innerHTML = `<div class="news-empty">${lang === "en" ? "Loading news..." : "Chargement des actualités..."}</div>`;
 
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxzyM0Fi6Qg8IzDx9LBmxbsYTLAisIy1IMykRBmGM6H4-jBf8v_eJ3JqD5aPpoTQMySvw/exec");
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxwnil4vwyG7Gh_7aPjqLQYyxmN19NfBV7PtKk__FbVAKj1lXEZNq59ens6fwEzC_xEsg/exec");
     const data = await res.json();
     const news = data.news || [];
 
@@ -499,5 +499,158 @@ async function loadNewsPage() {
 }
 
 loadNewsPage();
+const NEWS_URL = "https://script.google.com/macros/s/AKfycbxwnil4vwyG7Gh_7aPjqLQYyxmN19NfBV7PtKk__FbVAKj1lXEZNq59ens6fwEzC_xEsg/exec";
 
+function normalizeDriveImage(url) {
+  if (!url || typeof url !== "string") return "";
 
+  let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+
+  match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+
+  return url;
+}
+document.addEventListener("DOMContentLoaded", () => {
+  initNewsHome();
+});
+
+async function initNewsHome() {
+  const track = document.getElementById("newsTrack");
+  const dots = document.getElementById("newsDots");
+
+  if (!track) return;
+
+  const lang = localStorage.getItem("lang") || "fr";
+  track.innerHTML = `<div class="muted">Loading news...</div>`;
+  if (dots) dots.innerHTML = "";
+
+  try {
+    const res = await fetch(NEWS_URL);
+    const data = await res.json();
+    const news = data.news || [];
+
+    if (!news.length) {
+      track.innerHTML = `<div class="muted">No news yet.</div>`;
+      return;
+    }
+
+    const slidesData = [news[news.length - 1], ...news, news[0]];
+
+    track.innerHTML = slidesData.map(item => {
+      const title =
+        (lang === "en" ? item.title_en : item.title_fr) ||
+        item.title_fr ||
+        item.title ||
+        "News";
+
+      const excerpt =
+        (lang === "en" ? item.excerpt_en : item.excerpt_fr) ||
+        item.excerpt_fr ||
+        item.excerpt ||
+        "";
+
+      const formattedDate = item.date
+        ? new Date(item.date).toLocaleDateString(lang === "en" ? "en-GB" : "fr-FR")
+        : "";
+
+      const cover = normalizeDriveImage(item.cover);
+
+      return `
+        <div class="news-slide">
+          <article class="news-page-card">
+            ${cover ? `
+              <div class="news-page-cover">
+                <img src="${cover}" alt="${title}" loading="lazy" referrerpolicy="no-referrer">
+              </div>
+            ` : ""}
+            <div class="news-page-body">
+              <div class="news-page-date">${formattedDate}</div>
+              <h3 class="news-page-title">${title}</h3>
+              <p class="news-page-excerpt">${excerpt}</p>
+
+              <div class="news-page-actions">
+                <a class="btn btn--primary" href="news.html">
+                  ${lang === "en" ? "View all news" : "Voir toutes les actualités"}
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+    }).join("");
+
+    dots.innerHTML = news.map((_, i) =>
+      `<button class="dot ${i === 0 ? "active" : ""}" type="button"></button>`
+    ).join("");
+
+    let index = 1;
+
+    function getSlideWidth() {
+      const slide = track.querySelector(".news-slide");
+      return slide ? slide.getBoundingClientRect().width : 0;
+    }
+
+    function setTransform(animate = true) {
+      const width = getSlideWidth();
+      track.style.transition = animate ? "transform .7s cubic-bezier(.2,.8,.2,1)" : "none";
+      track.style.transform = `translateX(-${index * width}px)`;
+    }
+
+    function setActiveDot() {
+      const realIndex = (index - 1 + news.length) % news.length;
+      dots.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === realIndex);
+      });
+    }
+
+    function go(next) {
+      index = next;
+      setTransform(true);
+      setActiveDot();
+    }
+
+    setTransform(false);
+    setActiveDot();
+
+    let timer = setInterval(() => go(index + 1), 4000);
+
+    const slider = document.getElementById("newsSlider");
+    if (slider) {
+      slider.addEventListener("mouseenter", () => clearInterval(timer));
+      slider.addEventListener("mouseleave", () => {
+        timer = setInterval(() => go(index + 1), 4000);
+      });
+    }
+
+    track.addEventListener("transitionend", () => {
+      if (index === 0) {
+        index = news.length;
+        setTransform(false);
+        setActiveDot();
+      }
+      if (index === news.length + 1) {
+        index = 1;
+        setTransform(false);
+        setActiveDot();
+      }
+    });
+
+    dots.querySelectorAll(".dot").forEach((dot, i) => {
+      dot.addEventListener("click", () => go(i + 1));
+    });
+
+    window.addEventListener("resize", () => {
+      setTransform(false);
+    });
+
+  } catch (e) {
+    console.error("news error:", e);
+    track.innerHTML = `<div class="muted">Error loading news</div>`;
+  }
+}
