@@ -1,176 +1,562 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wormhole Tesseract</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-<canvas id="tesseract"></canvas>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{var W=["https://claude.ai","https://preview.claude.ai","https://eap-omelette.claude.ai"];var Y=30000;document.addEventListener("DOMContentLoaded",()=>{const D="transform-react-jsx-source";document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((C,F)=>{const Q=C.getAttribute("data-plugins")||"";if(Q.indexOf(D)<0){C.setAttribute("data-plugins",Q?`${Q},${D}`:D)}if(!C.hasAttribute("data-filename")){C.setAttribute("data-filename",C.getAttribute("src")||`inline-${F}`)}})});var K=window.parent;if(K&&K!==window){const D=(k,f)=>{try{K.postMessage({__omelette_log:true,type:k,data:f},"*")}catch{}};["log","warn","error"].forEach((k)=>{const f=console[k];console[k]=(...w)=>{const z=w.map((h)=>{try{return typeof h==="object"?JSON.stringify(h):String(h)}catch{try{return String(h)}catch{return"[unstringifiable]"}}}).join(" ");D(k,z);f.apply(console,w)}});window.addEventListener("error",(k)=>{const f=k.target;if(f&&f!==window&&f.tagName){const w=f.src||f.href||"";D("resource_error",`${f.tagName} failed to load: ${w}`)}else{D("error",`${k.message||"Unknown error"} at ${k.filename||"?"}:${k.lineno||0}:${k.colno||0}`)}},true);window.addEventListener("unhandledrejection",(k)=>{const f=k.reason;const w=f instanceof Error?`${f.message} ${f.stack}`:String(f);D("error",`Unhandled rejection: ${w}`)});const C=()=>{try{K.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(document.readyState==="complete")C();else window.addEventListener("load",C);if(window.ResizeObserver)new ResizeObserver(C).observe(document.documentElement);const F={};let Q=0;window.claude={complete(k){return new Promise((f,w)=>{if(!W.length){w(new Error("claude.complete: no parent origin"));return}const z=`c${++Q}`;const h=()=>setTimeout(()=>{delete F[z];w(new Error(`claude.complete: no data for ${Y/1000}s`))},Y);const J=h();F[z]={resolve:f,reject:w,text:"",t:J,arm:h};try{for(const V of W){K.postMessage({__om_api:true,id:z,body:k},V)}}catch(V){clearTimeout(J);delete F[z];w(V)}})}};const X=(k)=>{try{return JSON.stringify(k)}catch{return JSON.stringify(String(k))}};window.addEventListener("message",(k)=>{if(W.indexOf(k.origin)<0)return;if(k.source!==K)return;const f=k.data;if(!f)return;if(f.__om_api_r){const h=F[f.id];if(!h)return;if(f.error!=null){clearTimeout(h.t);delete F[f.id];h.reject(new Error(f.error));return}if(f.chunk!=null){clearTimeout(h.t);h.t=h.arm();h.text+=f.chunk;return}if(f.done){clearTimeout(h.t);delete F[f.id];h.resolve(f.text!=null?f.text:h.text);return}return}if(!f.__om_eval)return;const w=f;const z=(h)=>{k.source.postMessage({...h,__om_eval_r:1,id:w.id},k.origin)};try{const h=(0,eval)(w.code);if(h&&typeof h.then==="function"){h.then((J)=>z({ok:1,v:X(J)}),(J)=>z({ok:0,e:String(J)}))}else{z({ok:1,v:X(h)})}}catch(h){z({ok:0,e:String(h)})}})}})();
+</script>
 
-<script>
-  const canvas = document.getElementById('tesseract');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>404 — Lost in the 4th dimension</title>
+<style>
+  :root{
+    --ink:         #0a1520;
+    --ink-2:       #0f1d2b;
+    --teal:        #1fb6a6;
+    --teal-soft:   #7fe3d6;
+    --cyan:        #00d4ff;
+    --white:       #f4f8f9;
+    --muted:       #8aa1ad;
+    --hazard:      #f7c331;
+    --hazard-ink:  #1a1405;
+    --danger:      #e0473b;
 
-  // Tesseract vertices in 4D
-  const vertices = [
-    [-1, -1, -1, -1], [1, -1, -1, -1], [1, 1, -1, -1], [-1, 1, -1, -1],
-    [-1, -1, 1, -1], [1, -1, 1, -1], [1, 1, 1, -1], [-1, 1, 1, -1],
-    [-1, -1, -1, 1], [1, -1, -1, 1], [1, 1, -1, 1], [-1, 1, -1, 1],
-    [-1, -1, 1, 1], [1, -1, 1, 1], [1, 1, 1, 1], [-1, 1, 1, 1]
-  ];
-
-  // Tesseract edges
-  const edges = [
-    [0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4],
-    [0, 4], [1, 5], [2, 6], [3, 7], [8, 9], [9, 10], [10, 11], [11, 8],
-    [12, 13], [13, 14], [14, 15], [15, 12], [8, 12], [9, 13], [10, 14],
-    [11, 15], [0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]
-  ];
-
-  // Starfield
-  const stars = Array(200).fill().map(() => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 1.5 + 0.5,
-    speed: Math.random() * 0.5 + 0.2,
-    twinkle: Math.random() * 0.5 + 0.5
-  }));
-
-  // Draw stars
-  function drawStars() {
-    stars.forEach(star => {
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(Math.sin(Date.now() * 0.001 * star.twinkle))})`;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Move stars downward
-      star.y += star.speed;
-      if (star.y > canvas.height) star.y = 0;
-    });
+    /* Fluid scale tokens — everything keys off these so the layout never overflows */
+    --pad-x: clamp(16px, 3vw, 40px);
+    --pad-y: clamp(14px, 2.4svh, 28px);
+    --gap:   clamp(8px, 1.6svh, 18px);
   }
 
-  // 4D rotation with multiple axes
-  function rotate4D(vertices, angleX, angleY, angleZ, angleW) {
-    const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
-    const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
-    const cosZ = Math.cos(angleZ), sinZ = Math.sin(angleZ);
-    const cosW = Math.cos(angleW), sinW = Math.sin(angleW);
+  *{box-sizing:border-box; min-width:0}
+  html,body{height:100%}
+  html,body{
+    /* lock the viewport — no scroll on any device */
+    overflow:hidden;
+    overscroll-behavior:none;
+  }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(31,182,166,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at center, #06111b 0%, #03080d 60%, #000 100%);
+    color:var(--white);
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    -webkit-font-smoothing:antialiased;
+    /* dynamic viewport for mobile browser chrome */
+    height: 100svh;
+    height: 100dvh;
+  }
 
-    return vertices.map(([x, y, z, w]) => {
-      let nx = x * cosW - w * sinW;
-      let nw = x * sinW + w * cosW;
-      let ny = y * cosZ - z * sinZ;
-      let nz = y * sinZ + z * cosZ;
+  /* ================= PAGE LAYOUT =================
+     grid rows: [hud] [card — fills] [foot]
+     This guarantees everything fits within one viewport. */
+  .page{
+    position: fixed; inset:0;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--pad-y) var(--pad-x);
+    gap: var(--gap);
+    z-index:2;
+  }
 
-      const rx = nx * cosY - nz * sinY;
-      const rz = nx * sinY + nz * cosY;
-      const ry = ny * cosX - nw * sinX;
-      const rw = ny * sinX + nw * cosX;
+  /* ---- HUD (top row) ---- */
+  .hud{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size: clamp(9px, 1.1vw, 11px);
+    letter-spacing:.22em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .hud .dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--teal); margin-right:8px; vertical-align:middle;
+    box-shadow: 0 0 10px var(--teal);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; transform:scale(1)}
+    50%{opacity:.35; transform:scale(.7)}
+  }
+  .hud .right{ display:flex; gap: clamp(10px, 2vw, 22px); }
+  .hud .hide-sm{ display:inline; }
 
+  /* ---- CENTER CARD (middle row, auto-fills) ---- */
+  .center{
+    display:grid;
+    place-items:center;
+    min-height:0;   /* essential for grid 1fr children to shrink */
+  }
+  .card{
+    position:relative;
+    text-align:center;
+    /* fluid padding tied to viewport so things always fit */
+    padding:
+      clamp(26px, 4svh, 44px)
+      clamp(22px, 4vw, 48px)
+      clamp(22px, 3.4svh, 36px);
+    max-width: 560px;
+    width: min(94vw, 560px);
+    max-height: 100%;
+    background: linear-gradient(180deg, rgba(10,21,32,0.55) 0%, rgba(6,14,22,0.65) 100%);
+    border:1px solid rgba(31, 182, 166, 0.22);
+    border-radius: 4px;
+    backdrop-filter: blur(4px) saturate(120%);
+    -webkit-backdrop-filter: blur(4px) saturate(120%);
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 255, 0.06) inset,
+      0 40px 120px -20px rgba(0, 180, 220, 0.25),
+      0 0 60px -10px rgba(31, 182, 166, 0.35);
+  }
+  /* corner brackets */
+  .card::before, .card::after,
+  .card .br1, .card .br2{
+    content:""; position:absolute; width:16px; height:16px;
+    border:1.5px solid var(--teal);
+  }
+  .card::before{ top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .card::after { bottom:-1px; right:-1px; border-left:none; border-top:none;}
+  .card .br1{ top:-1px; right:-1px; border-left:none; border-bottom:none;}
+  .card .br2{ bottom:-1px; left:-1px; border-right:none; border-top:none;}
+
+  /* ---- Hazard badge ---- */
+  .hazard-badge{
+    position:absolute;
+    top:-14px; left:50%;
+    transform: translateX(-50%);
+    display:inline-flex; align-items:center; gap:7px;
+    padding: 5px 11px 5px 8px;
+    background: var(--hazard);
+    color: var(--hazard-ink);
+    font-size: clamp(9px, 1vw, 10px);
+    letter-spacing:.28em; text-transform:uppercase;
+    font-weight:700;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px -4px rgba(247,195,49,.4);
+    white-space:nowrap;
+  }
+  .hazard-badge svg{ display:block; flex-shrink:0; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size: clamp(9.5px, 1vw, 10.5px);
+    letter-spacing:.35em; text-transform:uppercase;
+    color: var(--teal);
+    margin-top: clamp(8px, 1.2svh, 14px);
+    margin-bottom: clamp(8px, 1.4svh, 16px);
+  }
+  .eyebrow .tri svg{ display:block; filter: drop-shadow(0 0 4px rgba(247,195,49,0.55)); }
+
+  /* ---- 404 headline ---- */
+  h1.code{
+    margin:0;
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-weight: 700;
+    /* tighter scaling that uses BOTH axes so it never overflows on short screens */
+    font-size: clamp(64px, min(14vw, 18svh), 144px);
+    line-height: .9;
+    letter-spacing: -0.04em;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 0.8vw, 10px);
+  }
+  h1.code .digit{
+    display:inline-block;
+    background: linear-gradient(180deg, #ffffff 0%, #7fe3d6 55%, #1fb6a6 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 40px rgba(31,182,166,0.15);
+    position: relative;
+  }
+  h1.code .digit .glitch{
+    position:absolute; inset:0; color:transparent;
+    background: linear-gradient(180deg, #00d4ff 0%, #00d4ff 100%);
+    -webkit-background-clip:text; background-clip:text;
+    mix-blend-mode: screen;
+    transform: translate(2px, 0);
+    opacity:.5;
+    animation: glitch 3.8s steps(1,end) infinite;
+    pointer-events:none;
+  }
+  /* Mini tesseract replacing the 0 — sized with em so it scales with headline */
+  .tess-zero{
+    --size: 0.92em;
+    width: var(--size);
+    height: var(--size);
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    transform: translateY(-0.02em);
+    filter:
+      drop-shadow(0 0 6px rgba(0, 212, 255, 0.55))
+      drop-shadow(0 0 14px rgba(31, 182, 166, 0.35));
+  }
+  .tess-zero canvas{ width: 100%; height: 100%; display: block; }
+  .tess-zero::before{
+    content:"";
+    position:absolute; inset:6%;
+    border-radius:50%;
+    border: 1px solid rgba(31,182,166,0.25);
+    border-top-color: rgba(0,212,255,0.9);
+    animation: tess-spin 2.4s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes tess-spin{ to{ transform: rotate(360deg); } }
+  @keyframes glitch{
+    0%,92%,100%{ transform: translate(0,0); opacity:0; }
+    93%{ transform: translate(3px,-1px); opacity:.7;}
+    94%{ transform: translate(-2px,1px); opacity:.5;}
+    95%{ transform: translate(1px,2px); opacity:.7;}
+    96%{ transform: translate(0,0); opacity:0;}
+  }
+
+  .subtitle{
+    margin: clamp(6px, 1svh, 10px) 0 0;
+    font-size: clamp(9.5px, 1vw, 11px);
+    letter-spacing:.3em; text-transform:uppercase;
+    color: var(--muted);
+  }
+
+  .quote{
+    margin: clamp(14px, 2.2svh, 24px) auto 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: clamp(15px, min(2.2vw, 2.4svh), 21px);
+    line-height: 1.4;
+    color: var(--white);
+    max-width: 440px;
+    text-wrap: pretty;
+  }
+  .quote .mark{
+    color: var(--teal);
+    font-style: normal;
+    font-family: Georgia, serif;
+    font-size: 1.4em;
+    line-height: 0;
+    position: relative;
+    top: .15em;
+    margin: 0 .08em;
+  }
+  .attrib{
+    margin-top: clamp(8px, 1.2svh, 12px);
+    font-size: clamp(9.5px, 1vw, 10.5px);
+    letter-spacing:.28em; text-transform:uppercase;
+    color: var(--muted);
+  }
+
+  /* ---- Button ---- */
+  .home-btn{
+    margin-top: clamp(18px, 2.6svh, 28px);
+    display: inline-flex; align-items:center; gap: clamp(10px, 1.2vw, 14px);
+    height: clamp(42px, 6svh, 52px);
+    padding: 0 clamp(16px, 2vw, 22px) 0 clamp(14px, 1.6vw, 18px);
+    background: var(--teal);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: clamp(11px, 1.1vw, 12.5px);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .18s ease, background .2s ease, box-shadow .2s ease;
+    box-shadow:
+      0 0 0 1px rgba(127,227,214,0.35),
+      0 10px 30px -8px rgba(31,182,166,0.55),
+      0 0 40px -6px rgba(0,212,255,0.35);
+    white-space:nowrap;
+  }
+  .home-btn:hover{
+    background: #29cdbc;
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(127,227,214,0.6),
+      0 14px 36px -8px rgba(31,182,166,0.75),
+      0 0 56px -6px rgba(0,212,255,0.55);
+  }
+  .home-btn:active{ transform: translateY(0); }
+  .home-btn .arrow{
+    width: 24px; height: 24px; display:grid; place-items:center;
+    background: rgba(10,21,32,0.18);
+    border-radius: 2px;
+    flex-shrink:0;
+  }
+
+  /* ---- Footer ---- */
+  .foot-wrap{
+    display:flex; flex-direction:column; gap: clamp(6px, 1svh, 10px);
+  }
+  .stripes{
+    height: 6px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--hazard) 0 14px,
+      var(--hazard-ink) 14px 28px
+    );
+    opacity: .55;
+    border-radius: 1px;
+    position:relative;
+  }
+  .stripes::after{
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0));
+  }
+  .foot{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size: clamp(9px, 1vw, 10.5px);
+    letter-spacing:.25em; text-transform:uppercase;
+    color: var(--muted);
+  }
+
+  /* ===== RESPONSIVE REFINEMENTS ===== */
+
+  /* Very short viewports (landscape phones, small laptops) — horizontal layout */
+  @media (max-height: 560px) and (min-width: 720px){
+    .card{
+      display:grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "badge badge"
+        "left  right";
+      column-gap: clamp(20px, 3vw, 36px);
+      row-gap: 4px;
+      text-align: left;
+      max-width: 780px;
+      width: min(94vw, 780px);
+      padding: clamp(18px, 3svh, 28px) clamp(24px, 3vw, 36px);
+    }
+    .hazard-badge{ grid-area: badge; }
+    .card-left{ grid-area: left; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; }
+    .card-right{ grid-area: right; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
+    .eyebrow{ margin-top:0; }
+    h1.code{ font-size: clamp(72px, 16svh, 120px); }
+    .quote{ margin-top: 0; text-align:left; }
+    .attrib{ align-self:flex-start; }
+    .home-btn{ align-self:flex-start; }
+    .subtitle{ text-align:left; }
+  }
+
+  /* Short viewports (laptop landscape but narrow) — compact type */
+  @media (max-height: 720px){
+    :root{ --pad-y: clamp(10px, 1.8svh, 18px); }
+  }
+
+  /* Tiny screens */
+  @media (max-width: 420px){
+    .hud .hide-sm{ display:none; }
+    .hazard-badge{ font-size:8.5px; letter-spacing:.22em; padding:4px 9px 4px 7px; }
+    .quote{ font-size: clamp(14px, 4.1vw, 17px); }
+  }
+
+  /* Portrait phones — keep everything vertical & breathing */
+  @media (max-width: 640px) and (orientation: portrait){
+    .card{ padding: clamp(22px, 3svh, 32px) 20px clamp(18px, 2.6svh, 26px); }
+    h1.code{ font-size: clamp(70px, 22vw, 110px); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    h1.code .digit .glitch{ animation: none; }
+    .hud .dot{ animation: none; }
+    .tess-zero::before{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== HUD ===== -->
+  <div class="hud" aria-hidden="true">
+    <div><span class="dot"></span>SYS<span class="hide-sm"> · DIMENSIONAL DRIFT</span></div>
+    <div class="right">
+      <span class="hide-sm">LAT 40.7° · LON –∞</span>
+      <span>STATUS: 404</span>
+    </div>
+  </div>
+
+  <!-- ===== CENTER ===== -->
+  <div class="center">
+    <main class="card" role="main">
+      <span class="br1"></span><span class="br2"></span>
+
+      <div class="hazard-badge" aria-hidden="true">
+        <svg width="13" height="12" viewBox="0 0 13 12" fill="none">
+          <path d="M6.5 1 L12 11 L1 11 Z" stroke="#1a1405" stroke-width="1.2" fill="#f7c331"/>
+          <rect x="6" y="4.5" width="1" height="3.2" fill="#1a1405"/>
+          <rect x="6" y="8.4" width="1" height="1" fill="#1a1405"/>
+        </svg>
+        SORRY FOR THE INCONVENIENCE
+      </div>
+
+      <!-- left column (used only in landscape-short layout) -->
+      <div class="card-left">
+        <div class="eyebrow">
+          <span class="tri" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1 L13 12 L1 12 Z" stroke="#1fb6a6" stroke-width="1.3" fill="none"/>
+            </svg>
+          </span>
+          ERROR / FOUR&nbsp;·&nbsp;ZERO&nbsp;·&nbsp;FOUR
+        </div>
+
+        <h1 class="code" aria-label="404">
+          <span class="digit">4<span class="glitch" aria-hidden="true">4</span></span>
+          <span class="tess-zero" aria-hidden="true">
+            <canvas id="tess-mini"></canvas>
+          </span>
+          <span class="digit">4<span class="glitch" aria-hidden="true">4</span></span>
+        </h1>
+        <div class="subtitle">Page lost in the 4th dimension</div>
+      </div>
+
+      <!-- right column -->
+      <div class="card-right">
+        <p class="quote">
+          <span class="mark">“</span>If Rome was built in a day, we would have used the same contractor.<span class="mark">”</span>
+        </p>
+        <div class="attrib">— The construction department</div>
+
+        <a class="home-btn" href="/" aria-label="Return to home page">
+          <span class="arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M6 1 L1 7 L6 13 M1 7 H13" stroke="#0a1520" stroke-width="1.8" stroke-linecap="square"/>
+            </svg>
+          </span>
+          Return to home base
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== FOOT ===== -->
+  <div class="foot-wrap">
+    <div class="stripes" aria-hidden="true"></div>
+    <div class="foot" aria-hidden="true">
+      <span>// tesseract.rotating</span>
+      <span class="hide-sm">press&nbsp;[H]&nbsp;for&nbsp;home</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'h' || e.key === 'H') window.location.href = '/';
+  });
+
+  /* ===== 4D tesseract geometry ===== */
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  const vertices = [
+    [-1,-1,-1,-1],[1,-1,-1,-1],[1,1,-1,-1],[-1,1,-1,-1],
+    [-1,-1,1,-1],[1,-1,1,-1],[1,1,1,-1],[-1,1,1,-1],
+    [-1,-1,-1,1],[1,-1,-1,1],[1,1,-1,1],[-1,1,-1,1],
+    [-1,-1,1,1],[1,-1,1,1],[1,1,1,1],[-1,1,1,1]
+  ];
+  const edges = [
+    [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7],[8,9],[9,10],[10,11],[11,8],
+    [12,13],[13,14],[14,15],[15,12],[8,12],[9,13],[10,14],
+    [11,15],[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]
+  ];
+  function rotate4D(v, aX, aY, aZ, aW){
+    const cX=Math.cos(aX), sX=Math.sin(aX);
+    const cY=Math.cos(aY), sY=Math.sin(aY);
+    const cZ=Math.cos(aZ), sZ=Math.sin(aZ);
+    const cW=Math.cos(aW), sW=Math.sin(aW);
+    return v.map(([x,y,z,w])=>{
+      let nx = x*cW - w*sW;
+      let nw = x*sW + w*cW;
+      let ny = y*cZ - z*sZ;
+      let nz = y*sZ + z*cZ;
+      const rx = nx*cY - nz*sY;
+      const rz = nx*sY + nz*cY;
+      const ry = ny*cX - nw*sX;
+      const rw = ny*sX + nw*cX;
       return [rx, ry, rz, rw];
     });
   }
-
-  // Project 4D vertices to 3D
-  function projectTo3D([x, y, z, w]) {
-    const distance = 4; // Adjust the depth of the 4D projection
-    const scale = distance / (distance - w);
-    return [x * scale, y * scale, z * scale];
+  function projectTo3D([x,y,z,w]){
+    const d = 4;
+    const s = d / (d - w);
+    return [x*s, y*s, z*s];
   }
 
-  // Project 3D vertices to 2D
-  function projectTo2D([x, y, z]) {
-    const scale = 50;
-    const perspective = 4 / (4 - z);
-    return [
-      canvas.width / 2 + x * scale * perspective,
-      canvas.height / 2 - y * scale * perspective
-    ];
-  }
+  /* ===== Mini tesseract — the "0" in 404 ===== */
+  (function miniTesseract(){
+    const c = document.getElementById('tess-mini');
+    if (!c) return;
+    const mctx = c.getContext('2d');
 
-  // Draw black hole with subtle accretion disk
-  function drawBlackHole() {
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
+    function sizeMini(){
+      const rect = c.getBoundingClientRect();
+      const w = Math.max(32, rect.width);
+      const h = Math.max(32, rect.height);
+      c.width  = w * DPR;
+      c.height = h * DPR;
+      mctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    sizeMini();
+    window.addEventListener('resize', sizeMini);
+    window.addEventListener('orientationchange', ()=>setTimeout(sizeMini, 100));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(sizeMini).catch(()=>{});
+    }
+    setTimeout(sizeMini, 300);
 
-    // Accretion disk (subtle glow)
-    const gradient = ctx.createRadialGradient(centerX, centerY, 90, centerX, centerY, 150);
-    gradient.addColorStop(0, "rgba(255, 255, 255, 0.1)");
-    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    let mX=0.3, mY=0.5, mZ=0.2, mW=0.0;
 
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 150, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
-    ctx.fill();
+    function loop(){
+      const W = c.clientWidth;
+      const H = c.clientHeight;
+      mctx.clearRect(0, 0, W, H);
 
-    // Black hole center
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 100, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
-    ctx.fill();
-  }
+      const rv = rotate4D(vertices, mX, mY, mZ, mW);
+      const pv = rv.map(projectTo3D).map(([x,y,z])=>{
+        const s = Math.min(W, H) * 0.18;
+        const p = 4/(4-z);
+        return [W/2 + x*s*p, H/2 - y*s*p, p];
+      });
 
-  // Animation loop
-  let angleX = 0, angleY = 0, angleZ = 0, angleW = 0;
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+      mctx.save();
+      mctx.globalCompositeOperation = 'lighter';
+      mctx.shadowBlur = 8;
+      mctx.shadowColor = 'rgba(0,212,255,0.95)';
+      for (const [a,b] of edges){
+        const [x1,y1,p1] = pv[a];
+        const [x2,y2,p2] = pv[b];
+        const avgP = (p1+p2)/2;
+        const grad = mctx.createLinearGradient(x1,y1,x2,y2);
+        grad.addColorStop(0,'rgba(31,182,166,0.95)');
+        grad.addColorStop(1,'rgba(0,212,255,0.95)');
+        mctx.strokeStyle = grad;
+        mctx.lineWidth = Math.max(0.9, 1.6 * avgP);
+        mctx.beginPath(); mctx.moveTo(x1,y1); mctx.lineTo(x2,y2); mctx.stroke();
+      }
+      mctx.restore();
 
-    // Draw stars and black hole
-    drawStars();
-    drawBlackHole();
+      for (const [a,b] of edges){
+        const [x1,y1] = pv[a];
+        const [x2,y2] = pv[b];
+        mctx.strokeStyle = 'rgba(220,250,245,0.95)';
+        mctx.lineWidth = 0.9;
+        mctx.beginPath(); mctx.moveTo(x1,y1); mctx.lineTo(x2,y2); mctx.stroke();
+      }
 
-    // Rotate vertices and project them
-    const rotatedVertices = rotate4D(vertices, angleX, angleY, angleZ, angleW);
-    const projectedVertices = rotatedVertices.map(projectTo3D).map(projectTo2D);
+      for (const [x,y,p] of pv){
+        mctx.fillStyle = 'rgba(255,255,255,0.95)';
+        mctx.beginPath(); mctx.arc(x, y, Math.max(0.8, 1.3*p), 0, Math.PI*2); mctx.fill();
+      }
 
-    // Draw edges with glowing effect
-    edges.forEach(([start, end]) => {
-      const [x1, y1] = projectedVertices[start];
-      const [x2, y2] = projectedVertices[end];
-
-      // Gradient glow for edges
-      const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
-      gradient.addColorStop(0, `rgba(0, 150, 255, 0.8)`);
-      gradient.addColorStop(1, `rgba(0, 255, 255, 0.5)`);
-
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = 1.8;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-    });
-
-    // Randomize rotation angles for wormhole effect
-    angleX += 0.01 + Math.random() * 0.002;
-    angleY += 0.008 + Math.random() * 0.002;
-    angleZ += 0.006 + Math.random() * 0.002;
-    angleW += 0.004 + Math.random() * 0.002;
-
-    requestAnimationFrame(animate);
-  }
-
-  // Resize canvas on window resize
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-
-  animate();
+      mX += 0.018; mY += 0.015; mZ += 0.011; mW += 0.022;
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
 </script>
+
 </body>
 </html>
