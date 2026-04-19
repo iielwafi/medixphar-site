@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wormhole Tesseract</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="tesseract"></canvas>
+
+<script>
+  const canvas = document.getElementById('tesseract');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Tesseract vertices in 4D
+  const vertices = [
+    [-1, -1, -1, -1], [1, -1, -1, -1], [1, 1, -1, -1], [-1, 1, -1, -1],
+    [-1, -1, 1, -1], [1, -1, 1, -1], [1, 1, 1, -1], [-1, 1, 1, -1],
+    [-1, -1, -1, 1], [1, -1, -1, 1], [1, 1, -1, 1], [-1, 1, -1, 1],
+    [-1, -1, 1, 1], [1, -1, 1, 1], [1, 1, 1, 1], [-1, 1, 1, 1]
+  ];
+
+  // Tesseract edges
+  const edges = [
+    [0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4],
+    [0, 4], [1, 5], [2, 6], [3, 7], [8, 9], [9, 10], [10, 11], [11, 8],
+    [12, 13], [13, 14], [14, 15], [15, 12], [8, 12], [9, 13], [10, 14],
+    [11, 15], [0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]
+  ];
+
+  // Starfield
+  const stars = Array(200).fill().map(() => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 1.5 + 0.5,
+    speed: Math.random() * 0.5 + 0.2,
+    twinkle: Math.random() * 0.5 + 0.5
+  }));
+
+  // Draw stars
+  function drawStars() {
+    stars.forEach(star => {
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(Math.sin(Date.now() * 0.001 * star.twinkle))})`;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Move stars downward
+      star.y += star.speed;
+      if (star.y > canvas.height) star.y = 0;
+    });
+  }
+
+  // 4D rotation with multiple axes
+  function rotate4D(vertices, angleX, angleY, angleZ, angleW) {
+    const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
+    const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+    const cosZ = Math.cos(angleZ), sinZ = Math.sin(angleZ);
+    const cosW = Math.cos(angleW), sinW = Math.sin(angleW);
+
+    return vertices.map(([x, y, z, w]) => {
+      let nx = x * cosW - w * sinW;
+      let nw = x * sinW + w * cosW;
+      let ny = y * cosZ - z * sinZ;
+      let nz = y * sinZ + z * cosZ;
+
+      const rx = nx * cosY - nz * sinY;
+      const rz = nx * sinY + nz * cosY;
+      const ry = ny * cosX - nw * sinX;
+      const rw = ny * sinX + nw * cosX;
+
+      return [rx, ry, rz, rw];
+    });
+  }
+
+  // Project 4D vertices to 3D
+  function projectTo3D([x, y, z, w]) {
+    const distance = 4; // Adjust the depth of the 4D projection
+    const scale = distance / (distance - w);
+    return [x * scale, y * scale, z * scale];
+  }
+
+  // Project 3D vertices to 2D
+  function projectTo2D([x, y, z]) {
+    const scale = 50;
+    const perspective = 4 / (4 - z);
+    return [
+      canvas.width / 2 + x * scale * perspective,
+      canvas.height / 2 - y * scale * perspective
+    ];
+  }
+
+  // Draw black hole with subtle accretion disk
+  function drawBlackHole() {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    // Accretion disk (subtle glow)
+    const gradient = ctx.createRadialGradient(centerX, centerY, 90, centerX, centerY, 150);
+    gradient.addColorStop(0, "rgba(255, 255, 255, 0.1)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 150, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // Black hole center
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 100, 0, Math.PI * 2);
+    ctx.fillStyle = "black";
+    ctx.fill();
+  }
+
+  // Animation loop
+  let angleX = 0, angleY = 0, angleZ = 0, angleW = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw stars and black hole
+    drawStars();
+    drawBlackHole();
+
+    // Rotate vertices and project them
+    const rotatedVertices = rotate4D(vertices, angleX, angleY, angleZ, angleW);
+    const projectedVertices = rotatedVertices.map(projectTo3D).map(projectTo2D);
+
+    // Draw edges with glowing effect
+    edges.forEach(([start, end]) => {
+      const [x1, y1] = projectedVertices[start];
+      const [x2, y2] = projectedVertices[end];
+
+      // Gradient glow for edges
+      const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+      gradient.addColorStop(0, `rgba(0, 150, 255, 0.8)`);
+      gradient.addColorStop(1, `rgba(0, 255, 255, 0.5)`);
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    });
+
+    // Randomize rotation angles for wormhole effect
+    angleX += 0.01 + Math.random() * 0.002;
+    angleY += 0.008 + Math.random() * 0.002;
+    angleZ += 0.006 + Math.random() * 0.002;
+    angleW += 0.004 + Math.random() * 0.002;
+
+    requestAnimationFrame(animate);
+  }
+
+  // Resize canvas on window resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  animate();
+</script>
+</body>
+</html>
