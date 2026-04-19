@@ -1,2 +1,3 @@
+# Other settings like title, email, etc. may be above
 plugins:
   - jekyll-sitemap
