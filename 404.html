@@ -188,16 +188,6 @@
       drop-shadow(0 0 14px rgba(31, 182, 166, 0.35));
   }
   .tess-zero canvas{ width: 100%; height: 100%; display: block; }
-  .tess-zero::before{
-    content:"";
-    position:absolute; inset:6%;
-    border-radius:50%;
-    border: 1px solid rgba(31,182,166,0.25);
-    border-top-color: rgba(0,212,255,0.9);
-    animation: tess-spin 2.4s linear infinite;
-    pointer-events:none;
-  }
-  @keyframes tess-spin{ to{ transform: rotate(360deg); } }
   @keyframes glitch{
     0%,92%,100%{ transform: translate(0,0); opacity:0; }
     93%{ transform: translate(3px,-1px); opacity:.7;}
@@ -356,7 +346,6 @@
   @media (prefers-reduced-motion: reduce){
     h1.code .digit .glitch{ animation: none; }
     .hud .dot{ animation: none; }
-    .tess-zero::before{ animation: none; }
   }
 </style>
 </head>
@@ -415,7 +404,7 @@
         </p>
         <div class="attrib">— The construction department</div>
 
-        <a class="home-btn" href="/" aria-label="Return to home page">
+        <a class="home-btn" href="https://medixpharclub.com/" aria-label="Return to home page">
           <span class="arrow" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M6 1 L1 7 L6 13 M1 7 H13" stroke="#0a1520" stroke-width="1.8" stroke-linecap="square"/>
@@ -440,7 +429,7 @@
 
 <script>
   window.addEventListener('keydown', (e)=>{
-    if (e.key === 'h' || e.key === 'H') window.location.href = '/';
+    if (e.key === 'h' || e.key === 'H') window.location.href = 'https://medixpharclub.com/';
   });
 
   /* ===== 4D tesseract geometry ===== */

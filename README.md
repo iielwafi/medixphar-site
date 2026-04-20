@@ -1,109 +1,89 @@
-# 🧬 MedixPhar — Student Club Website
+<div align="center">
 
 ![MEDIXPHAR-SITE](assets/img/logo.svg)
 
+# 🧬 MedixPhar — Student Club Website
+
+**Medical × Pharmacy — a community that learns, acts, and creates impact.**
+
+[🌐 Live Website](https://medixpharclub.com) · [📸 Instagram](https://www.instagram.com/medixphar/) · [🎵 TikTok](https://www.tiktok.com/@club.medixphar)
+
+</div>
+
+---
+
+## 📌 Overview
+
 Official website of **MedixPhar**, a student club focused on **medicine, pharmacy, innovation, and community collaboration**.
 
-The platform centralizes club activities, news, team members, partners, and student engagement in a modern and responsive interface.
+The platform centralizes club activities, news, team members, partners, and student engagement in a modern and responsive interface. It was developed to provide a **central digital platform** where students can:
 
----
-
-# 🌐 Live Demo
-
-🚀 Website:  
-https://medixpharclub.com
-
----
-
-# 📌 Overview
-
-MedixPhar website was developed to provide a **central digital platform** for the club where students can:
-
-• Discover upcoming activities  
-• Read the latest club news  
-• Explore the team members  
-• View partners and collaborators  
-• Join the club easily  
+- Discover upcoming activities
+- Read the latest club news
+- Explore the team members
+- View partners and collaborators
+- Join the club easily
 
 The project focuses on **modern UI, performance, and simplicity**.
 
 ---
 
-# ✨ Main Features
+## ✨ Main Features
 
-### 🎨 Modern UI
-- Clean design
-- Glassmorphism interface
-- Smooth animations
-
-### 🌙 Dark / Light Mode
-User can toggle between dark and light theme.
-
-### 🌍 Multi-language Support
-- French
-- English
-
-### 📰 Dynamic News System
-News is managed through **Google Sheets** and fetched automatically.
-
-### 📅 Events Section
-Interactive slider displaying club activities.
-
-### 👥 Team Section
-Presentation of the club members.
-
-### 🤝 Partners Slider
-Animated partners carousel.
-
-### 📹 Video Integration
-Embedded video presentation.
-
-### 📩 Join Form
-Users can join the club through a **Google Form integration**.
+| Feature | Description |
+| --- | --- |
+| 🎨 **Modern UI** | Clean design, glassmorphism interface, smooth animations |
+| 🌙 **Dark / Light Mode** | Toggle between dark and light theme |
+| 🌍 **Multi-language** | French and English support |
+| 📰 **Dynamic News** | News managed through Google Sheets and fetched automatically |
+| 📅 **Events Section** | Interactive slider displaying club activities |
+| 👥 **Team Section** | Presentation of the club members |
+| 🤝 **Partners Slider** | Animated partners carousel |
+| 📹 **Video Integration** | Embedded video presentation |
+| 📩 **Join Form** | Google Form integration for new members |
 
 ---
 
-# 🧠 How the News System Works
+## 🧠 How the News System Works
 
-The news system is **fully dynamic**.
+The news system is **fully dynamic**. Admins can publish news **without modifying the website code**.
 
-# Workflow:
-
+```text
 Google Sheets
-↓
+     ↓
 Google Apps Script API
-↓
+     ↓
 Website fetch() request
-↓
+     ↓
 News section updates automatically
-
-
-Admins can publish news **without modifying the website code**.
+```
 
 ---
 
-# 🧰 Technologies Used
+## 🧰 Technologies Used
 
-Frontend
+**Frontend**
 
-• HTML5  
-• CSS3  
-• JavaScript (Vanilla JS)
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
 
-Integration
+**Integration**
 
-• Google Sheets  
-• Google Apps Script API
+- Google Sheets
+- Google Apps Script API
 
-Design
+**Design**
 
-• Glassmorphism UI  
-• Responsive Layout  
-• CSS Animations
+- Glassmorphism UI
+- Responsive Layout
+- CSS Animations
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
+
+```text
 medixphar/
 │
 ├── index.html
@@ -111,71 +91,73 @@ medixphar/
 ├── events.html
 ├── news.html
 │
-├── assets
-│ ├── css
-│ │ └── style.css
-│ │
-│ ├── js
-│ │ ├── main.js
-│ │ └── news.js
-│ │
-│ ├── img
-│ │ ├── logo.png
-│ │ └── images
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   ├── main.js
+│   │   └── news.js
+│   │
+│   └── img/
+│       ├── logo.png
+│       └── images/
 │
 └── README.md
-
+```
 
 ---
 
-# 📱 Responsive Design
+## 📱 Responsive Design
 
 The website is fully responsive and optimized for:
 
-✔ Desktop  
-✔ Tablet  
-✔ Mobile
+- ✔ Desktop
+- ✔ Tablet
+- ✔ Mobile
 
 ---
 
-# 🚀 Future Improvements
+## 🚀 Future Improvements
 
 Planned upgrades for the platform:
 
-• Admin dashboard  
-• Event registration system  
-• Member management system  
-• Newsletter integration  
-• Blog / Articles system  
-• Advanced analytics  
+- Admin dashboard
+- Event registration system
+- Member management system
+- Newsletter integration
+- Blog / Articles system
+- Advanced analytics
 
 ---
 
-# 👨‍💻 Development
+## 👨‍💻 Development
 
 This project was built as a **student club platform** to showcase activities and improve digital communication within the community.
 
 ---
 
-# 🤝 Contribution
+## 🤝 Contribution
 
-Contributions are welcome.
+Contributions are welcome. If you want to improve the project:
 
-If you want to improve the project:
-
-1️⃣ Fork the repository  
-2️⃣ Create a new branch  
-3️⃣ Commit your changes  
-4️⃣ Open a Pull Request
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Open a Pull Request
 
 ---
 
-# 📄 License
+## 📄 License
 
-This project is intended for **educational and community purposes**.
+This project is intended for **educational and community purposes**. See [LICENSE.md](LICENSE.md) for details.
 
 ---
 
-# 💙 MedixPhar
+<div align="center">
+
+### 💙 MedixPhar
 
 **Building a community that learns, acts, and creates impact.**
+
+</div>
