@@ -68,7 +68,7 @@ Users can join the club through a **Google Form integration**.
 The news system is **fully dynamic**.
 
 # Workflow:
-
+```
 Google Sheets
 ↓
 Google Apps Script API
@@ -76,7 +76,7 @@ Google Apps Script API
 Website fetch() request
 ↓
 News section updates automatically
-
+```
 
 Admins can publish news **without modifying the website code**.
 
@@ -104,6 +104,7 @@ Design
 ---
 
 # 📁 Project Structure
+```
 medixphar/
 │
 ├── index.html
@@ -124,8 +125,7 @@ medixphar/
 │ │ └── images
 │
 └── README.md
-
-
+```
 ---
 
 # 📱 Responsive Design
