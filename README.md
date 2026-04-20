@@ -163,8 +163,8 @@ This project was built as a **student club platform** to showcase activities and
 Contributions are not open by default.
 
 If you would like to contribute or suggest improvements, please contact the owner first to request permission.
-
 Approved contributions may be accepted after review.
+
 ---
 
 # 📄 License
