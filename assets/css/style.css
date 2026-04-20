@@ -756,8 +756,10 @@ html[data-theme="light"] .topbar{
   gap: 18px;
   width: max-content;
   animation: partnersScroll 26s linear infinite;
-}
 
+  /* 🔥 هذا هو الحل */
+  will-change: transform;
+}
 .partners-slider:hover .partners-track{
   animation-play-state: paused;
 }
