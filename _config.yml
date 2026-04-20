@@ -1,3 +1,7 @@
-# Other settings like title, email, etc. may be above
+title: MedixPhar
+description: Club étudiant MedixPhar — Médecine & Pharmacie. Événements, ateliers et initiatives.
+url: https://medixpharclub.com
+lang: fr
+
 plugins:
   - jekyll-sitemap
