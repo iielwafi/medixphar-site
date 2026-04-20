@@ -11,7 +11,7 @@ The platform centralizes club activities, news, team members, partners, and stud
 # 🌐 Live Demo
 
 🚀 Website:  
-(https://medixpharclub.com/)
+https://medixpharclub.com/
 
 ---
 
