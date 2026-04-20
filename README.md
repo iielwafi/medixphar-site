@@ -123,6 +123,7 @@ medixphar/
 │ ├── img
 │ │ ├── logo.png
 │ │ └── images
+| | └── video
 │
 └── README.md
 ```
@@ -159,22 +160,32 @@ This project was built as a **student club platform** to showcase activities and
 
 # 🤝 Contribution
 
-Contributions are welcome.
+Contributions are not open by default.
 
-If you want to improve the project:
+If you would like to contribute or suggest improvements, please contact the owner first to request permission.
 
-1️⃣ Fork the repository  
-2️⃣ Create a new branch  
-3️⃣ Commit your changes  
-4️⃣ Open a Pull Request
-
+Approved contributions may be accepted after review.
 ---
 
 # 📄 License
 
-This project is intended for **educational and community purposes**.
+This project is protected under a Custom Permission License.
+
+It is intended for educational purposes only. Any use, modification, or deployment requires explicit permission from the author.
 
 ---
+
+# 📩 Contact
+
+If you would like to use this project, request permission, or discuss collaboration, please contact:
+
+**iielwafi**  
+📧 Email: miloelwafi@gmail.com
+
+---
+
+⚠️ Note:  
+This project is not open-source. Any use, modification, or deployment requires explicit permission.
 
 # 💙 MedixPhar
 
